@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" 
+			   xmlns:components="com.costin.components.*" creationComplete="application1_creationCompleteHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.collections.IList;
+			import mx.events.FlexEvent;
+			
+			protected function application1_creationCompleteHandler(event:FlexEvent):void
+			{
+				// TODO Auto-generated method stub
+				var obj:Object = {item1:"1", item2:2, item3:3}
+					var arr:IList = new ArrayCollection([obj, obj,obj,obj,obj,obj]);
+					dragAndDropGrid.dataProvider = arr;
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>	
+	<components:DragAndDropGrid id="dragAndDropGrid"
+		>
+		<components:columns>
+			
+			<s:ArrayList>
+				<s:GridColumn headerText="item1" width="250" dataField="item1" />
+				<s:GridColumn headerText="item2" width="250" dataField="item2" />
+				<s:GridColumn headerText="item3" width="250" dataField="item3" />
+			</s:ArrayList>
+		</components:columns>
+	</components:DragAndDropGrid>
+</s:Application>
