@@ -25,7 +25,6 @@
 	<components:DragAndDropGrid id="dragAndDropGrid"
 		>
 		<components:columns>
-			
 			<s:ArrayList>
 				<s:GridColumn headerText="item1" width="250" dataField="item1" />
 				<s:GridColumn headerText="item2" width="250" dataField="item2" />
