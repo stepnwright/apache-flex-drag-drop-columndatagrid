@@ -168,28 +168,30 @@ public class DragAndDropGrid extends DataGrid {
         }
 
     }
-
     private function showColumnDropFeedback(event:DragEvent):void {
-        var pt:Point = new Point(event.stageX, event.stageY);
-        pt = this.columnHeaderGroup.globalToLocal(pt);
-        var newDropIndex:int = this.columnHeaderGroup.getHeaderIndexAt(pt.x, pt.y);
-        if (newDropIndex != -1) {
-            var renderer:IGridItemRenderer = this.columnHeaderGroup.getHeaderRendererAt(newDropIndex);
-            if (!columnMoveDropIndicator) {
-                columnMoveDropIndicator = new DragDropIndicator;
-                this.columnHeaderGroup.overlay.addDisplayObject(columnMoveDropIndicator);
-            }
-            if (pt.x < renderer.x + renderer.width / 2)
-                columnMoveDropIndicator.x = renderer.x - columnMoveDropIndicator.width / 2;
-            else {
-                columnMoveDropIndicator.x = renderer.x + renderer.width - columnMoveDropIndicator.width / 2;
-                newDropIndex++;
-            }
-            dropIndex = newDropIndex;
-        }
-        else {
-            cleanUpDropIndicator();
-        }
+    	var scrollPosition:Number = this.grid.horizontalScrollPosition;
+    	var pt:Point = new Point(event.stageX + scrollPosition , event.stageY);
+    	pt = this.columnHeaderGroup.globalToLocal(pt);
+    	
+    	var newDropIndex:int = this.columnHeaderGroup.getHeaderIndexAt(pt.x, pt.y);
+    	
+    	if (newDropIndex != -1) {
+    		var renderer:IGridItemRenderer = this.columnHeaderGroup.getHeaderRendererAt(newDropIndex);
+    		if (!dragDropIndicator) {
+    			dragDropIndicator = new DragDropIndicator;
+    			this.columnHeaderGroup.overlay.addDisplayObject(dragDropIndicator);
+    		}
+    		if (pt.x < (renderer.x + scrollPosition) + renderer.width / 2)
+    			dragDropIndicator.x = (renderer.x - scrollPosition) - dragDropIndicator.width / 2;
+    		else {
+    			dragDropIndicator.x = (renderer.x + scrollPosition) + renderer.width - dragDropIndicator.width / 2;
+    			newDropIndex++;
+    		}
+    		dropIndex = newDropIndex;
+    	}
+    	else {
+    		cleanUpDropIndicator();
+    	}
     }
 
     /**
